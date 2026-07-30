@@ -28,6 +28,7 @@ int main() {
     const int DUPLICATE_ID = 55;
     const int INVALID_NEGATIVE_ID = -5;
     const int MISSING_ID = 999;
+    const int INVALID_ZERO_ID = 0;
     const int THREE_ITEMS = 3;
     const int TWO_ITEMS = 2;
     const int STRESS_COUNT = 1000;
@@ -209,7 +210,7 @@ int main() {
     std::cout << std::endl;
     std::cout << "--- PHASE 3: INVALID PUSH OPERATIONS ---" << std::endl;
 
-    operation_result = fifo_queue.push(0, FIRST_INFO);
+    operation_result = fifo_queue.push(INVALID_ZERO_ID, FIRST_INFO);
 
     tests_run++;
     if (!operation_result && fifo_queue.count() == 0) {
@@ -239,7 +240,7 @@ int main() {
         std::cout << "FAIL: FIFO accepted empty information." << std::endl;
     }
 
-    operation_result = lifo_queue.push(0, FIRST_INFO);
+    operation_result = lifo_queue.push(INVALID_ZERO_ID, FIRST_INFO);
 
     tests_run++;
     if (!operation_result && lifo_queue.count() == 0) {
