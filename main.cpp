@@ -33,6 +33,8 @@ int main() {
     const int TWO_ITEMS = 2;
     const int STRESS_COUNT = 1000;
     const int STRESS_BASE_ID = 1000;
+    const int LAST_STRESS_POSITION = STRESS_COUNT - 1;
+    const int LAST_STRESS_ID = STRESS_BASE_ID + LAST_STRESS_POSITION;
 
     const std::string FIRST_INFO = "Alpha";
     const std::string SECOND_INFO = "Beta";
@@ -872,7 +874,7 @@ int main() {
 
     tests_run++;
     if (fifo_stress.peek() == STRESS_BASE_ID &&
-        lifo_stress.peek() == STRESS_BASE_ID + STRESS_COUNT - 1) {
+        lifo_stress.peek() == LAST_STRESS_ID) {
         tests_passed++;
         std::cout << "PASS: Stress-test peeks reflect FIFO and LIFO order."
                   << std::endl;
@@ -882,11 +884,11 @@ int main() {
     }
 
     tests_run++;
-    if (fifo_stress.find(STRESS_BASE_ID + STRESS_COUNT - 1) == 0 &&
-        fifo_stress.find(STRESS_BASE_ID) == STRESS_COUNT - 1 &&
+    if (fifo_stress.find(LAST_STRESS_ID) == 0 &&
+        fifo_stress.find(STRESS_BASE_ID) == LAST_STRESS_POSITION &&
         lifo_stress.find(STRESS_BASE_ID) == 0 &&
-        lifo_stress.find(STRESS_BASE_ID + STRESS_COUNT - 1) ==
-            STRESS_COUNT - 1) {
+        lifo_stress.find(LAST_STRESS_ID) ==
+            LAST_STRESS_POSITION) {
         tests_passed++;
         std::cout << "PASS: Stress-test find positions are correct."
                   << std::endl;
@@ -908,7 +910,7 @@ int main() {
             phase_success = false;
         }
 
-        expected_id = STRESS_BASE_ID + STRESS_COUNT - 1 - i;
+        expected_id = LAST_STRESS_ID - i;
         expected_information = STRESS_PREFIX + std::to_string(expected_id);
         operation_result = lifo_stress.pull(returned_data);
 
