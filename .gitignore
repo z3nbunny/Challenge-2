@@ -1,0 +1,17 @@
+# Ignore absolutely everything by default to prevent accidental commits
+# This acts as a primary security layer against binaries and IDE configuration files.
+*
+
+# Un-ignore directories so Git can actually traverse the project folders
+# Without this, Git will not be able to scan subdirectories for our whitelisted files.
+!*/
+
+# Explicitly un-ignore required C++ source and header files
+# These are the exclusive code artifacts permitted for compilation and grading.
+!*.cpp
+!*.h
+
+# Un-ignore documentation and version control configuration
+# The markdown files are required for the README and AI essay, while the gitignore itself must be tracked.
+!*.md
+!.gitignore
